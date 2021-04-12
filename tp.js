@@ -51,7 +51,14 @@ Nota: usá un objeto donde cada propiedad sea un argumento, y el valor el result
       usá hasOwnProperty!
 */
 function cacheFunction(cb) {
-  return
+  
+  let cache = {};
+  return (arg) => {
+    if (!cache.hasOwnProperty(arg)) {
+      cache = { ...cache, [arg]: cb(arg) }
+    }
+    return cache[arg]
+  };
 }
 
 module.exports = {
